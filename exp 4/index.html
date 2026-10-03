@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node.js Web Server - Exp 4</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; }
+    .status-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .btn {
+      background: #6366f1;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #4f46e5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Node.js Web Server</h1>
+    <p>Experiment 4: Basic HTTP Server with dynamic API routes.</p>
+    
+    <div id="status" class="status-box">Connecting to server...</div>
+    
+    <button class="btn" onclick="fetchServerInfo()">Fetch Server Status</button>
+  </div>
+
+  <script>
+    async function fetchServerInfo() {
+      const statusDiv = document.getElementById('status');
+      try {
+        const res = await fetch('/api/info');
+        const data = await res.json();
+        statusDiv.innerHTML = `
+          <strong>Status:</strong> ${data.status}<br>
+          <strong>Uptime:</strong> ${data.uptime}<br>
+          <strong>Node Version:</strong> ${data.nodeVersion}<br>
+          <strong>Timestamp:</strong> ${data.timestamp}
+        `;
+      } catch (err) {
+        statusDiv.textContent = 'Error connecting to server';
+      }
+    }
+    fetchServerInfo();
+  </script>
+</body>
+</html>

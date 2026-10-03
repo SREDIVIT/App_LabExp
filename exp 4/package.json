@@ -1,0 +1,11 @@
+{
+  "name": "exp-4-node-server",
+  "version": "1.0.0",
+  "description": "Basic Node.js Web Server for Experiment 4",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
